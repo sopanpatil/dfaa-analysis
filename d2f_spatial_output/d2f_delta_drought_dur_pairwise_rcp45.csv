@@ -1,0 +1,4 @@
+pair,median1,median2,n1,n2,pvalue,significant
+England vs Scotland,36.0,1.125,385,164,3.960996055737565e-32,True
+England vs Wales,36.0,3.25,385,61,2.717262456851608e-06,True
+Scotland vs Wales,1.125,3.25,164,61,0.0020271113533246415,True
