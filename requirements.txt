@@ -1,0 +1,25 @@
+# Core dependencies for the dfaa-analysis pipeline (Stages 1-7 and figures/).
+#
+# Versions are set as minimums, not exact pins, since the pipeline does not
+# rely on any version-specific behaviour beyond what these floors provide.
+# Pin exact versions here instead if you need bit-for-bit reproducibility
+# for the Zenodo archive.
+
+numpy>=1.24
+pandas>=2.0
+scipy>=1.10
+scikit-learn>=1.3
+matplotlib>=3.7
+
+# Required by pandas for reading/writing .parquet files (used throughout
+# the pipeline's intermediate and aggregated outputs). Not imported
+# directly in any script, so easy to miss if installing package-by-package.
+pyarrow>=14.0
+
+# Only required by figures/build_figure2_cluster_map.py (catchment maps).
+# Not needed for the main pipeline (Stages 1-7) or the other three figures.
+geopandas>=0.13
+
+# Not on PyPI -- clone and install separately as a sibling directory.
+# See the top-level README ("External data dependencies") for details.
+# git+https://github.com/sopanpatil/hbv-model
