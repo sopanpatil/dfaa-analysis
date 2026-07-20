@@ -1,0 +1,4 @@
+metric,rho,pvalue,n
+mean_sp,0.706,2.762e-102,671
+max_sp,0.661,1.454e-85,671
+frac_days_with_snow,0.680,3.249e-92,671

@@ -1,0 +1,2 @@
+cluster0_n,cluster0_median,cluster0_q25,cluster0_q75,cluster1_n,cluster1_median,cluster1_q25,cluster1_q75,mannwhitney_u,pvalue,significant
+196,0.02,0.01,0.0425,380,0.01,0.01,0.02,54009.5,2.0523578378181715e-22,True
