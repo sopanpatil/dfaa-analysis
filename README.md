@@ -4,9 +4,13 @@ Analysis pipeline for flood-to-drought (FTD) and drought-to-flood (DTF) transiti
 
 This repository depends on the separate [`hbv-model`](https://github.com/sopanpatil/hbv-model) repository for the HBV model itself and its calibrated parameters — see Stage 1 below.
 
+## Data bundled in this repository
+
+- **CAMELS-GB v2 catchment attribute tables** (`camels_gb_v2_{climatic,hydrologic,hydrogeology,topographic}_attributes.csv`): these four small attribute tables are bundled directly in this repository so the pipeline runs without a separate download. They are © UK Centre for Ecology & Hydrology and contributing organisations, released under the [Open Government Licence](https://eidc.ac.uk/licences/ogl/plain), and redistributed here under its terms. Per the licence, any reuse must include this attribution: *"Contains data supplied by UK Centre for Ecology & Hydrology, British Geological Survey, Environment Agency, Natural Resources Wales and Scottish Environmental Protection Agency."* See Coxon et al. (2026) for the full dataset description and citation. This applies only to these four attribute CSVs — the repository's own code is licensed separately under the MIT License in `LICENSE`.
+
 ## External data dependencies (not bundled in this repository)
 
-- **CAMELS-GB v2**: catchment attributes and observed discharge. Publicly available from the NERC Environmental Data Service; see Coxon et al. (2026). The catchment boundaries shapefile (`camels_gb_v2_catchment_boundaries.shp`) is part of this dataset and is needed only by `figures/` — see `figures/README.md`.
+- **CAMELS-GB v2 observed discharge and hydrometeorological time series**, and the **catchment boundaries shapefile** (`camels_gb_v2_catchment_boundaries.shp`, needed only by `figures/` — see `figures/README.md`): these are substantially larger than the attribute tables above and are not bundled here. Publicly available from the NERC Environmental Data Service; see Coxon et al. (2026).
 - **CHESS-SCAPE**: climate projection forcing (precipitation, temperature, PET). Publicly available from the Centre for Environmental Data Analysis; see Robinson et al. (2023).
 - **ONS Countries boundary** (`great_britain_boundary.geojson`): used for country-level spatial analysis (Scotland/England/Wales assignment), by both the main pipeline (Stage 4) and `figures/`.
 
