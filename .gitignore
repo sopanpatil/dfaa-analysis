@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+
+# External data dependencies (not bundled -- see README "External data
+# dependencies"). Kept here so they're never accidentally committed if
+# someone downloads them into the repo root for a local run.
+chess_scape_output/
+camels_gb_v2_catchment_boundaries.*
+great_britain_boundary.geojson
+figures/catchment_boundaries/
