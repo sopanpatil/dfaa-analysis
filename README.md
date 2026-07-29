@@ -64,7 +64,7 @@ This repository depends on the separate [`hbv-model`](https://github.com/sopanpa
 - `country_summary_f2d.py` / `country_summary_d2f_allrcp.py` — per-country (England/Scotland/Wales) medians, Kruskal-Wallis tests, and pairwise Mann-Whitney U tests for each delta metric, across all four RCPs.
 
 ### Figures
-- `figures/` — all manuscript figure-generation scripts (Figures 1-4, plus a supplementary DTF typology figure). Reads directly from the output directories above rather than hardcoding values. See `figures/README.md` for details and its own external data dependencies.
+- `figures/` — all manuscript figure-generation scripts (Figures 1-4). Reads directly from the output directories above rather than hardcoding values. See `figures/README.md` for details and its own external data dependencies.
 
 ## Requirements
 
