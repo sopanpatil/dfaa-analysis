@@ -4,7 +4,7 @@
 # flood-to-drought (FTD) pipeline in extract_transitions.py.
 #
 # Reuses the SAME flood and drought event extraction logic (Q5/Q80,
-# 5-day pooling, Fleig et al. 2006 drought pooling) from
+# 5-day flood pooling, no drought pooling) from
 # extract_transitions.py -- only the PAIRING DIRECTION and the METRICS
 # computed at the transition are different.
 #
@@ -72,13 +72,12 @@ FUTURE_END     = "2080-09-30"
 
 FLOOD_POOL_GAP   = 5
 DROUGHT_MIN_DUR  = 5    # NOTE: shorter than Anderson et al. (2025)'s 30-day
-                          # minimum and Fleig et al. (2006)'s typical thresholds.
+                          # minimum. Sole independence criterion -- drought
+                          # spells are not pooled (Methods 2.2).
                           # Matches the FTD pipeline's choice (extract_transitions.py)
                           # for direct cross-direction comparability. Held fixed
                           # across the sensitivity sweep below -- only
                           # MAX_RECOVERY_GAP is varied.
-DROUGHT_POOL_GAP = 5
-DROUGHT_POOL_REC = 0.9
 
 DEFAULT_MAX_RECOVERY_GAP = 90    # matches Götte & Brunner (2024) and
                                     # Anderson et al. (2025) precedent
@@ -129,20 +128,7 @@ def _extract_drought_events(flow, q80):
             events.append([start, i - 1]); in_event = False
     if in_event:
         events.append([start, len(flow) - 1])
-    if len(events) > 1:
-        pooled = [events[0]]
-        for ev in events[1:]:
-            gap_start, gap_end = pooled[-1][1] + 1, ev[0] - 1
-            gap_len = gap_end - gap_start + 1
-            if gap_len <= DROUGHT_POOL_GAP:
-                inter_max = float(np.max(flow[gap_start:gap_end + 1])) if gap_len > 0 else 0.0
-                if inter_max < q80 * DROUGHT_POOL_REC:
-                    pooled[-1][1] = ev[1]
-                else:
-                    pooled.append(ev)
-            else:
-                pooled.append(ev)
-        events = pooled
+    # No inter-event pooling -- see extract_transitions.py / Methods 2.2.
     result = []
     for s, e in events:
         dur = e - s + 1

@@ -110,9 +110,8 @@ FUTURE_END     = "2080-09-30"
 # Event extraction parameters
 FLOOD_MIN_DURATION  = 1    # days; minimum flood event length
 FLOOD_POOL_GAP      = 5    # days; merge flood events closer than this
-DROUGHT_MIN_DUR     = 5    # days; minimum drought spell length
-DROUGHT_POOL_GAP    = 5    # days; inter-event gap for Fleig pooling
-DROUGHT_POOL_REC    = 0.9  # recovery ratio; inter-event max flow < Q80 * this
+DROUGHT_MIN_DUR     = 5    # days; minimum drought spell length (sole
+                           # independence criterion -- no inter-event pooling)
 MAX_TRANSITION_GAP  = 90   # days; max gap from flood end to drought start
 
 N_WORKERS = 8
@@ -178,23 +177,9 @@ def _extract_drought_events(flow, q80):
     if in_event:
         events.append([start, len(flow) - 1])
 
-    # Fleig et al. (2006) pooling
-    if len(events) > 1:
-        pooled = [events[0]]
-        for ev in events[1:]:
-            gap_start = pooled[-1][1] + 1
-            gap_end   = ev[0] - 1
-            gap_len   = gap_end - gap_start + 1
-            if gap_len <= DROUGHT_POOL_GAP:
-                inter_max = float(np.max(flow[gap_start:gap_end + 1])) \
-                    if gap_len > 0 else 0.0
-                if inter_max < q80 * DROUGHT_POOL_REC:
-                    pooled[-1][1] = ev[1]
-                else:
-                    pooled.append(ev)
-            else:
-                pooled.append(ev)
-        events = pooled
+    # No inter-event pooling: each maximal run below Q80 is retained as a
+    # distinct event. The DROUGHT_MIN_DUR filter below is the sole
+    # independence criterion (Methods 2.2).
 
     result = []
     for s, e in events:

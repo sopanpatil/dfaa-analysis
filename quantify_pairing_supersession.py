@@ -69,8 +69,6 @@ FUTURE_START,   FUTURE_END   = "2050-10-01", "2080-09-30"
 FLOOD_MIN_DURATION = 1
 FLOOD_POOL_GAP     = 5
 DROUGHT_MIN_DUR    = 5
-DROUGHT_POOL_GAP   = 5
-DROUGHT_POOL_REC   = 0.9
 MAX_TRANSITION_GAP = 90   # FTD gap window (Methods 2.2)
 MAX_RECOVERY_GAP   = 90   # DTF gap window (Methods 2.2)
 
@@ -116,20 +114,7 @@ def _extract_drought_events(flow, q80):
             events.append([start, i - 1]); in_event = False
     if in_event:
         events.append([start, len(flow) - 1])
-    if len(events) > 1:
-        pooled = [events[0]]
-        for ev in events[1:]:
-            gap_start, gap_end = pooled[-1][1] + 1, ev[0] - 1
-            gap_len = gap_end - gap_start + 1
-            if gap_len <= DROUGHT_POOL_GAP:
-                inter_max = float(np.max(flow[gap_start:gap_end + 1])) if gap_len > 0 else 0.0
-                if inter_max < q80 * DROUGHT_POOL_REC:
-                    pooled[-1][1] = ev[1]
-                else:
-                    pooled.append(ev)
-            else:
-                pooled.append(ev)
-        events = pooled
+    # No inter-event pooling -- see extract_transitions.py / Methods 2.2.
     result = []
     for s, e in events:
         if (e - s + 1) >= DROUGHT_MIN_DUR:
