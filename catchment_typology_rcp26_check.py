@@ -24,7 +24,7 @@
 #       Cluster-mean and IQR for all delta metrics and key attributes.
 #
 #   optimal_k.parquet
-#       Silhouette scores and inertia for k=2..6 (SI Table S1).
+#       Silhouette scores and inertia for k=2..6 (SI Table S2).
 #
 # Usage
 # -----
