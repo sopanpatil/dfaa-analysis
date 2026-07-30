@@ -13,6 +13,7 @@ authors:
   - family-names: "Jahanshahi"
     given-names: "Afshin"
     orcid: "https://orcid.org/0000-0003-0221-0055"
+doi: "10.5281/zenodo.21703373"
 version: 1.0.0
 date-released: "2026-07-30"
 repository-code: "https://github.com/sopanpatil/dfaa-analysis"
