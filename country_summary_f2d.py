@@ -101,6 +101,24 @@ def kruskal_wallis_test(df: pd.DataFrame, metric: str) -> dict:
     return {"metric": metric, "h_stat": h_stat, "pvalue": p_value, "significant": p_value < ALPHA}
 
 
+def holm_adjust(pvals):
+    """Holm-Bonferroni step-down adjusted p-values, preserving input order.
+
+    The three pairwise country comparisons within a given metric and RCP are
+    treated as one post-hoc family (Methods 2.4), applied where the
+    Kruskal-Wallis test for that metric is significant.
+    """
+    p = np.asarray(pvals, dtype=float)
+    n = p.size
+    order = np.argsort(p)
+    adjusted = np.empty(n, dtype=float)
+    running_max = 0.0
+    for rank, idx in enumerate(order):
+        running_max = max(running_max, (n - rank) * p[idx])
+        adjusted[idx] = min(running_max, 1.0)
+    return adjusted
+
+
 def pairwise_mannwhitney(df: pd.DataFrame, metric: str) -> pd.DataFrame:
     countries = sorted(df["country"].dropna().unique())
     rows = []
@@ -116,7 +134,12 @@ def pairwise_mannwhitney(df: pd.DataFrame, metric: str) -> pd.DataFrame:
                 "pair": f"{c1} vs {c2}", "median1": v1.median(), "median2": v2.median(),
                 "n1": len(v1), "n2": len(v2), "pvalue": pval, "significant": pval < ALPHA,
             })
-    return pd.DataFrame(rows)
+    out = pd.DataFrame(rows)
+    if out.empty:
+        return out
+    out["pvalue_holm"] = holm_adjust(out["pvalue"].values)
+    out["significant"] = out["pvalue_holm"] < ALPHA
+    return out
 
 
 def parse_args():
