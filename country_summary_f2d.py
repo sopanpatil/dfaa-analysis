@@ -1,7 +1,7 @@
 # country_summary_f2d.py
 # -------------------------
 # Mirrors country_summary_d2f_allrcp.py, adapted for FTD (Methods 2.4,
-# Section 3.3, Table 2 / Supplementary Table S4).
+# Section 3.3, Table 2 / Supplementary Tables S5 and S6).
 #
 # Tests whether FTD's delta_drought_dur shows the same England-specific
 # geographic concentration as DTF's (Section 3.3), alongside the other
