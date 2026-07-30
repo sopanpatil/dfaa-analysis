@@ -3,7 +3,7 @@
 # DTF equivalent of test_snowmelt_hypothesis.py. Uses the
 # England/Scotland/Wales country split (rather than the DTF typology
 # cluster labels in catchment_typology_d2f.py) as the grouping variable,
-# since Table 2 / Supplementary Table S5 establishes a strong,
+# since Table 2 / Supplementary Table S7 establishes a strong,
 # significant country-level divide in delta_gap independent of the
 # cluster-based typology (Section 3.3).
 #
