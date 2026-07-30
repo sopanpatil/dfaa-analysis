@@ -1,7 +1,7 @@
 # country_summary_d2f_allrcp.py
 # -------------------------------
 # Quantifies the country-level pattern in DTF's delta_gap (Methods 2.4,
-# Section 3.3, Table 2 / Supplementary Table S5): Scotland shows widening
+# Section 3.3, Table 2 / Supplementary Tables S7 and S8): Scotland shows widening
 # gaps (matching FTD's direction) while England shows shortening gaps,
 # driving the overall negative national median (Section 3.1).
 #
