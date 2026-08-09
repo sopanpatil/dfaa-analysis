@@ -15,8 +15,6 @@ This repository depends on the separate [`hbv-model`](https://github.com/sopanpa
 - **Catchment-mean CHESS-SCAPE forcing (pr/tas/pet) and this pipeline's Stage 1 HBV output (discharge, SM, UZ, LZ, SP)**, pre-processed and archived at [`https://doi.org/10.5281/zenodo.21861386`](https://doi.org/10.5281/zenodo.21861386), as an alternative to regenerating them from raw CHESS-SCAPE via Stage 1. This archive also includes additional HBV generating-flux fields (Q0, Q1, Q2, melt) that are not used by this repository.
 - **ONS Countries boundary** (`great_britain_boundary.geojson`): used for country-level spatial analysis (Scotland/England/Wales assignment), by both the main pipeline (Stage 4) and `figures/`.
 
-## External data dependencies (not bundled in this repository)
-
 ## Pipeline stages
 
 ### Stage 1 — Hydrological simulation (Methods 2.1/2.3)
