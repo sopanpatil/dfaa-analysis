@@ -11,8 +11,11 @@ This repository depends on the separate [`hbv-model`](https://github.com/sopanpa
 ## External data dependencies (not bundled in this repository)
 
 - **CAMELS-GB v2 observed discharge and hydrometeorological time series**, and the **catchment boundaries shapefile** (`camels_gb_v2_catchment_boundaries.shp`, needed only by `figures/` — see `figures/README.md`): these are substantially larger than the attribute tables above and are not bundled here. Publicly available from the NERC Environmental Data Service; see Coxon et al. (2026).
-- **CHESS-SCAPE**: climate projection forcing (precipitation, temperature, PET). Publicly available from the Centre for Environmental Data Analysis; see Robinson et al. (2023).
+- **CHESS-SCAPE**: climate projection forcing (precipitation, temperature, wind, humidity, radiation). Publicly available from the Centre for Environmental Data Analysis; see Robinson et al. (2023). PET is not a native CHESS-SCAPE variable; it is derived from these fields via FAO-56 Penman-Monteith.
+- **Catchment-mean CHESS-SCAPE forcing (pr/tas/pet) and this pipeline's Stage 1 HBV output (discharge, SM, UZ, LZ, SP)**, pre-processed and archived at `https://doi.org/10.5281/zenodo.21861386`, as an alternative to regenerating them from raw CHESS-SCAPE via Stage 1. This archive also includes additional HBV generating-flux fields (Q0, Q1, Q2, melt) that are not used by this repository.
 - **ONS Countries boundary** (`great_britain_boundary.geojson`): used for country-level spatial analysis (Scotland/England/Wales assignment), by both the main pipeline (Stage 4) and `figures/`.
+
+## External data dependencies (not bundled in this repository)
 
 ## Pipeline stages
 
