@@ -4,6 +4,13 @@ Analysis pipeline for flood-to-drought (FTD) and drought-to-flood (DTF) transiti
 
 This repository depends on the separate [`hbv-model`](https://github.com/sopanpatil/hbv-model) repository for the HBV model itself and its calibrated parameters — see Stage 1 below.
 
+**`hbv-model` is a required external dependency, not on PyPI.** Clone it as a sibling directory, then symlink its package into this repository so `run_hbv_chess_scape.py`'s `from hbv_model.hbv import HBVModel` resolves — cloning as a sibling alone is not enough, since Python only searches the directory containing the script being run, not its parent or siblings:
+
+```bash
+git clone https://github.com/sopanpatil/hbv-model ../hbv-model
+ln -s ../hbv-model/hbv_model hbv_model
+```
+
 ## Data bundled in this repository
 
 - **CAMELS-GB v2 catchment attribute tables** (`camels_gb_v2_{climatic,hydrologic,hydrogeology,topographic}_attributes.csv`): these four small attribute tables are bundled directly in this repository so the pipeline runs without a separate download. They are © UK Centre for Ecology & Hydrology and contributing organisations, released under the [Open Government Licence](https://eidc.ac.uk/licences/ogl/plain), and redistributed here under its terms. Per the licence, any reuse must include this attribution: *"Contains data supplied by UK Centre for Ecology & Hydrology, British Geological Survey, Environment Agency, Natural Resources Wales and Scottish Environmental Protection Agency."* See Coxon et al. (2026) for the full dataset description and citation. This applies only to these four attribute CSVs — the repository's own code is licensed separately under the MIT License in `LICENSE`.
@@ -69,7 +76,7 @@ This repository depends on the separate [`hbv-model`](https://github.com/sopanpa
 
 ## Requirements
 
-`pip install -r requirements.txt`. This covers the main pipeline (Stages 1-7); `figures/` has one additional dependency (`geopandas`, for Figure 2 only) already included in the same file — see `figures/README.md` for which script needs it. `hbv-model` (Stage 1) is not on PyPI and must be cloned separately as a sibling directory — see "External data dependencies" above.
+`pip install -r requirements.txt`. This covers the main pipeline (Stages 1-7); `figures/` has one additional dependency (`geopandas`, for Figure 2 only) already included in the same file — see `figures/README.md` for which script needs it. `hbv-model` (Stage 1) is not on PyPI and must be cloned and symlinked separately — see the note near the top of this README.
 
 ## Running the pipeline
 
